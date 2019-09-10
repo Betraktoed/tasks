@@ -1,0 +1,33 @@
+#!/usr/bin/perl
+
+use 5.016;
+use warnings;
+
+package Animal{
+	sub new {
+		my $class = $_[0];
+		my $self = {
+			name => $_[1],
+			age => 0,
+			status => "Alive",
+		};
+		bless $self, $class;
+	}
+	sub make_sound{
+		say "Some_animal_sound";
+	}
+	sub get_older{
+		my $self = pop;
+		($self) -> {"age"} += 1;
+	}
+}
+
+package Cat{
+	use parent -norequire,  qw/ Animal /;
+	sub make_sound{
+		say "Meow";
+		$_[0]->SUPER::make_sound();
+	}
+}
+say Cat->make_sound;
+

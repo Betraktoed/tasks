@@ -1,0 +1,38 @@
+#!/usr/bin/perl
+use 5.016;
+use warnings;
+
+
+my @unsorted = ( qw/ 7 1 3 4 2 4 6 5 5 / );
+my $flag = 0;
+for (my $i = 0; $i < $#unsorted - 1; $i++){
+	$flag = 0;
+	for ( my $j = 0; $j < $#unsorted - $i; $j++){
+		if ( $unsorted[$j] > $unsorted[$j + 1] ){
+			( $unsorted[$j], $unsorted[$j + 1] ) = ( $unsorted[$j + 1], $unsorted[$j] );
+		}
+	}
+}
+say @unsorted;
+
+my $x = pop;
+my ( $first, $last ) = ( 0, $#unsorted + 1 );
+if ( $unsorted[$first] > $x ){
+	die("NOT_MATCH");
+}
+elsif ( $unsorted[$last - 1] < $x ){
+	die("NOT_MATCH");
+}
+while ( $first < $last ){
+	my $mid = $first + ( $last - $first ) / 2;
+	if ( $x <= $unsorted[$mid] ){
+		$last = $mid;
+	}else{
+		$first = $mid + 1;
+	}
+}
+if ( $unsorted[$last] == $x) {
+	die( "MATCH" );
+}else{
+	die( "NOT_MATCH" );
+}

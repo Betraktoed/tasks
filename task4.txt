@@ -1,0 +1,1 @@
+SELECT domains.dname FROM domains LEFT JOIN users ON domains.user_id = users.user_id WHERE users.name = "Иван Иванов";

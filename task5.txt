@@ -1,0 +1,6 @@
+chmod ugo+w /var/logs/archive
+cd /var/logs/archive
+tar -xvzf backup.tar.gz
+find -type f -name "*.txt" -exec rm -f {} \;
+grep -lr "user deleted"
+
